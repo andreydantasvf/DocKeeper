@@ -99,6 +99,22 @@ class CategoriesController {
 
     return response.json(category);
   }
+
+  async showTree(request, response) {
+    function toTree(categories, tree) {
+      if (!tree) {
+        tree = categories.filter(category => !category.parentId);
+      }
+      tree = tree.map(parentNode => {
+        const isChild = node => node.parentId == parentNode.id;
+        parentNode.children = toTree(categories, categories.filter(isChild));
+        return parentNode;
+      });
+      return tree;
+    }
+
+    await knex("categories").then(categories => response.json(toTree(categories)));
+  }
 }
 
 module.exports = CategoriesController;
