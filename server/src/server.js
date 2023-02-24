@@ -1,11 +1,16 @@
 require("express-async-errors");
-require("dotenv/config")
+require("dotenv/config");
+const startDb = require("./database/mongodb");
+const updateStats = require("./schedules/statsSchedule");
 const AppError = require("./utils/AppError");
 
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const routes = require("./routes");
+
+startDb();
+updateStats();
 
 const app = express();
 app.use(cors());
