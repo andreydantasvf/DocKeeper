@@ -1,11 +1,12 @@
+require("dotenv/config");
 const path = require("path");
 
 module.exports = {
   client: 'postgresql',
   connection: {
     database: 'dockeeper',
-    user: 'postgres',
-    password: 'cagada14'
+    user: process.env.USER_POSTGRES,
+    password: process.env.PASSWORD_POSTGRES
   },
   pool: {
     min: 2,

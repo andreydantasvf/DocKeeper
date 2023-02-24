@@ -1,8 +1,9 @@
+require("dotenv/config");
 const mongoose = require("mongoose");
 
 async function startDb() {
   mongoose.set('strictQuery', true);
-  await mongoose.connect('mongodb+srv://andreydantasvf:cagada14@cluster0.w5qz6zg.mongodb.net/test', {
+  await mongoose.connect(process.env.URI_MONGODB, {
     useNewUrlParser: true
   })
     .catch(error => {
