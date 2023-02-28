@@ -26,7 +26,7 @@ export default createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: #FFF;
+    color: black;
   }
 
   button, a {
