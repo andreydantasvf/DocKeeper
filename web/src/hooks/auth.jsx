@@ -29,6 +29,8 @@ function AuthProvider({ children }) {
   async function signOut() {
     localStorage.removeItem("@dockeeper:user");
     localStorage.removeItem("@dockeeper:token");
+
+    setData({});
   }
 
   useEffect(() => {
