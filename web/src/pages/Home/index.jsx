@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 import { Header } from "../../components/Header";
 import { Menu } from "../../components/Menu";
+import { Footer } from "../../components/Footer";
 
 import { Container } from "./styles";
 
@@ -15,6 +16,7 @@ export function Home() {
       <main>
         <h1>Home</h1>
       </main>
+      <Footer />
     </Container>
   )
 }
