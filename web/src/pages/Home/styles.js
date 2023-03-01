@@ -12,6 +12,7 @@ export const Container = styled.div`
   > main {
     height: 100%;
     grid-area: content;
+    padding: 2rem;
   }
 
   &.hide-menu {
