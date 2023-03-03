@@ -23,3 +23,12 @@ export const Container = styled.div`
     grid-template-columns: 30rem auto;
   }
 `;
+
+export const StatsContainer = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+`;
