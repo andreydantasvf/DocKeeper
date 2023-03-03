@@ -1,4 +1,4 @@
-import {  useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AiOutlineDown, AiOutlineRight } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +32,7 @@ export function Header({ hideToggle = false }) {
         </div>
       }
 
-      <h1>DocKeeper</h1>
+      <h1><Link to="/">DocKeeper</Link></h1>
 
       <UserMenu>
         <span>{user.name}</span>

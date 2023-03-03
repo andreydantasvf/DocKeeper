@@ -34,10 +34,13 @@ export const Container = styled.header`
 
   > h1 {
     font-size: 3rem;
-    color: #FFF;
     font-weight: 100;
     flex-grow: 1;
     text-align: center;
+
+    a {
+      color: #FFF;
+    }
   }
 `;
 
