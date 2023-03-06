@@ -3,14 +3,15 @@ const AppError = require("../utils/AppError");
 
 class ArticlesController {
   async create(request, response) {
-    const { name, description, categoryId, userId, content } = request.body;
+    const { name, imageUrl, description, categoryId, userId, content } = request.body;
 
     await knex("articles").insert({
       name,
       description,
       categoryId,
       userId,
-      content
+      content,
+      imageUrl
     });
 
     return response.status(201).json();
