@@ -7,16 +7,12 @@ export const Container = styled.div`
   display: grid;
   grid-template-rows: 8rem auto 4rem;
   grid-template-columns: 45% auto;
-  grid-template-areas: "header header" "menu content" "menu footer";
+  grid-template-areas: "header header" "content content" "footer footer";
 
   > main {
     height: 100%;
     grid-area: content;
     padding: 2rem;
-  }
-
-  &.hide-menu {
-    grid-template-areas: "header header" "content content" "footer footer";
   }
 
   @media (min-width: 768px) {

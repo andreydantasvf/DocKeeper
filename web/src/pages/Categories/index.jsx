@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { AiFillFolder } from "react-icons/ai";
-import { useSelector } from "react-redux";
 
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -19,7 +18,6 @@ export function Categories() {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false)
   const [parentId, setParentId] = useState(null);
-  const { isMenuVisible } = useSelector(state => state.menu);
 
   async function fetchCategories() {
     const response = await api.get("/categories");
@@ -74,8 +72,8 @@ export function Categories() {
   }, []);
 
   return (
-    <Container className={!isMenuVisible && "hide-menu"}>
-      <Header />
+    <Container>
+      <Header hideToggle={true} />
       <Menu />
       <main>
         <TitlePage
