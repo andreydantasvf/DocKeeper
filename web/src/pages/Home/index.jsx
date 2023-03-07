@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { AiFillHome, AiFillFolder, AiFillFile } from "react-icons/ai";
-import { FaUserAlt } from "react-icons/fa";
+import { AiFillFile } from "react-icons/ai";
 
 import { Header } from "../../components/Header";
 import { Menu } from "../../components/Menu";
 import { Footer } from "../../components/Footer";
 import { TitlePage } from "../../components/TitlePage";
-import { Stat } from "../../components/Stat";
 import { Loading } from "../../components/Loading";
 
 import { api } from "../../services/api";
 
-import { Container, StatsContainer } from "./styles";
+import { Container, MyArticles } from "./styles";
+import { ArticleCard } from "../../components/ArticleCard";
 
 export function Home() {
-  const [data, setData] = useState(null);
+  const [articles, setArticles] = useState(null);
   const { isMenuVisible } = useSelector(state => state.menu);
 
   useEffect(() => {
-    async function fetchStats() {
-      const response = await api.get("/stats");
-
-      setData(response.data);
+    async function fetchArticles() {
+      const response = await api.get("/articles");
+      setArticles(response.data.data);
     }
 
-    fetchStats();
+    fetchArticles();
   }, []);
 
   return (
@@ -34,36 +32,27 @@ export function Home() {
       <Menu />
       <main>
         <TitlePage
-          title="Dashboard"
-          subTitle="Verifique os dados da aplicação"
-          icon={AiFillHome}
+          title="Meus Artigos"
+          subTitle="Clique em um dos artigos para saber mais sobre ele."
+          icon={AiFillFile}
         />
 
-        {data ?
-          <StatsContainer>
-            <Stat
-              title="Categorias"
-              color="#d54d50"
-              stat={data.categories}
-              icon={AiFillFolder}
-            />
-            <Stat
-              title="Artigos"
-              color="#3bc480"
-              stat={data.articles}
-              icon={AiFillFile}
-            />
-            <Stat
-              title="Usuários"
-              color="#3282cd"
-              stat={data.users}
-              icon={FaUserAlt}
-            />
-          </StatsContainer>
-          :
-          <Loading />
+        {
+          articles
+            ?
+            <MyArticles>
+              {articles.map(article => (
+                <ArticleCard
+                  key={String(article.id)}
+                  name={article.name}
+                  description={article.description}
+                  id={article.id}
+                />
+              ))}
+            </MyArticles>
+            :
+            <Loading />
         }
-
       </main>
       <Footer />
     </Container>

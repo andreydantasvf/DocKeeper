@@ -24,11 +24,9 @@ export const Container = styled.div`
   }
 `;
 
-export const StatsContainer = styled.div`
+export const MyArticles = styled.div`
   margin-top: 2rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 3rem;
 `;
