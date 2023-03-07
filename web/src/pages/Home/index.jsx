@@ -1,30 +1,45 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiFillFile } from "react-icons/ai";
+import { handleCategory, handleName } from "../../redux/categorySlice";
+
 
 import { Header } from "../../components/Header";
 import { Menu } from "../../components/Menu";
 import { Footer } from "../../components/Footer";
 import { TitlePage } from "../../components/TitlePage";
 import { Loading } from "../../components/Loading";
+import { ArticleCard } from "../../components/ArticleCard";
 
 import { api } from "../../services/api";
 
 import { Container, MyArticles } from "./styles";
-import { ArticleCard } from "../../components/ArticleCard";
 
 export function Home() {
   const [articles, setArticles] = useState(null);
+  const { id } = useSelector(state => state.category);
+  const { name } = useSelector(state => state.category);
   const { isMenuVisible } = useSelector(state => state.menu);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function setInitialIdCategory() {
+      const response = await api.get("/categories/tree");
+      dispatch(handleCategory(response.data[0].id));
+      dispatch(handleName(response.data[0].name));
+    }
+
+    setInitialIdCategory();
+  }, []);
 
   useEffect(() => {
     async function fetchArticles() {
-      const response = await api.get("/articles");
-      setArticles(response.data.data);
+      const response = await api.get(`categories/${id}/articles`);
+      setArticles(response.data);
     }
 
     fetchArticles();
-  }, []);
+  }, [id]);
 
   return (
     <Container className={!isMenuVisible && "hide-menu"}>
@@ -33,7 +48,7 @@ export function Home() {
       <main>
         <TitlePage
           title="Meus Artigos"
-          subTitle="Clique em um dos artigos para saber mais sobre ele."
+          subTitle={`Todos os seus artigos sobre: ${name}`}
           icon={AiFillFile}
         />
 
