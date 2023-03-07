@@ -107,7 +107,9 @@ class CategoriesController {
       }
       tree = tree.map(parentNode => {
         const isChild = node => node.parentId == parentNode.id;
-        parentNode.children = toTree(categories, categories.filter(isChild));
+        parentNode.nodes = toTree(categories, categories.filter(isChild));
+        parentNode.key = parentNode.id;
+        parentNode.label = parentNode.name;
         return parentNode;
       });
       return tree;
