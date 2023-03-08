@@ -34,7 +34,7 @@ export function Home() {
 
   useEffect(() => {
     async function fetchArticles() {
-      const response = await api.get(`categories/${id}/articles`);
+      const response = await api.get(`articles/category/${id}`);
       setArticles(response.data);
     }
 
