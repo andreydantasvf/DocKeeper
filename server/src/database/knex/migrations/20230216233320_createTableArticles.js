@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.string("description", 1000).notNull();
     table.string("imageUrl", 1000);
     table.binary("content").notNull();
+    
     table.integer("userId").references("id")
       .inTable("users").notNull();
     table.integer("categoryId").references("id")
