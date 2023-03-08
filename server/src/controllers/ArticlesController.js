@@ -3,7 +3,8 @@ const AppError = require("../utils/AppError");
 
 class ArticlesController {
   async create(request, response) {
-    const { name, imageUrl, description, categoryId, userId, content } = request.body;
+    const { name, imageUrl, description, categoryId, content } = request.body;
+    const userId = request.user.id;
 
     await knex("articles").insert({
       name,
@@ -19,8 +20,9 @@ class ArticlesController {
 
   async delete(request, response) {
     const { id } = request.params;
+    const userId = request.user.id;
 
-    const article = await knex("articles").where({ id }).first();
+    const article = await knex("articles").where({ id, userId }).first();
 
     if (!article) {
       throw new AppError("Artigo não encontrado.");
@@ -33,8 +35,9 @@ class ArticlesController {
 
   async show(request, response) {
     const { id } = request.params;
+    const userId = request.user.id;
 
-    const article = await knex("articles").where({ id }).first();
+    const article = await knex("articles").where({ id, userId }).first();
 
     if (!article) {
       throw new AppError("Artigo não encontrada.");
@@ -47,6 +50,7 @@ class ArticlesController {
 
   async showByCategory(request, response) {
     const categoryId = request.params.id;
+    const userId = request.user.id;
     const categories = await knex.raw(
       `
       WITH RECURSIVE subcategories (id) AS (
