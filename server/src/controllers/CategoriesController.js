@@ -4,10 +4,12 @@ const AppError = require("../utils/AppError");
 class CategoriesController {
   async create(request, response) {
     const { name, parentId } = request.body;
+    const userId = request.user.id;
 
     await knex("categories").insert({
       name,
-      parentId
+      parentId,
+      userId
     });
 
     return response.status(201).json();
@@ -15,8 +17,9 @@ class CategoriesController {
 
   async delete(request, response) {
     const { id } = request.params;
+    const userId = request.user.id;
 
-    const category = await knex("categories").where({ id }).first();
+    const category = await knex("categories").where({ id, userId }).first();
 
     if (!category) {
       throw new AppError("Categoria não encontrada.");
@@ -66,7 +69,9 @@ class CategoriesController {
       return categoriesWithPath;
     }
 
-    const categories = await knex("categories");
+    const userId = request.user.id;
+
+    const categories = await knex("categories").where({ userId });
 
     return response.json(withPath(categories));
   }
@@ -86,7 +91,10 @@ class CategoriesController {
       return tree;
     }
 
-    await knex("categories").then(categories => response.json(toTree(categories)));
+    const userId = request.user.id;
+
+    await knex("categories").where({ userId })
+      .then(categories => response.json(toTree(categories)));
   }
 }
 
