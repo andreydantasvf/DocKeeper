@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillFile } from "react-icons/ai";
-import { handleCategory, handleName } from "../../redux/categorySlice";
-
+import { Link } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 import { Menu } from "../../components/Menu";
@@ -12,6 +11,7 @@ import { Loading } from "../../components/Loading";
 import { ArticleCard } from "../../components/ArticleCard";
 
 import { api } from "../../services/api";
+import { handleCategory, handleName } from "../../redux/categorySlice";
 
 import { Container, MyArticles } from "./styles";
 
@@ -68,6 +68,10 @@ export function Home() {
             :
             <Loading />
         }
+
+        <Link to="/articles">
+          Criar artigo
+        </Link>
       </main>
       <Footer />
     </Container>

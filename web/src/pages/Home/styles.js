@@ -13,6 +13,13 @@ export const Container = styled.div`
     height: 100%;
     grid-area: content;
     padding: 2rem;
+
+    a {
+      background: #2d6e81;
+      padding: 2rem;
+      color: #FFF;
+      border-radius: .8rem;
+    }
   }
 
   &.hide-menu {
@@ -25,7 +32,7 @@ export const Container = styled.div`
 `;
 
 export const MyArticles = styled.div`
-  margin-top: 2rem;
+  margin: 2rem 0 10rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
