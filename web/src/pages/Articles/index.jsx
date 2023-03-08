@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AiFillFolder } from "react-icons/ai";
+import { AiFillFile } from "react-icons/ai";
 
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
@@ -12,6 +12,7 @@ import { useAuth } from "../../hooks/auth";
 
 import { Container, CategoriesContent } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/BackButton";
 
 export function Articles() {
   const [categories, setCategories] = useState(null);
@@ -68,10 +69,12 @@ export function Articles() {
       <Menu />
       <main>
         <TitlePage
-          icon={AiFillFolder}
-          title="Categorias"
-          subTitle="Crie ou edite as suas categorias"
+          icon={AiFillFile}
+          title="Criar Artigos"
+          subTitle="Crie seus artigos..."
         />
+
+        <BackButton />
 
         <CategoriesContent>
           <form>
