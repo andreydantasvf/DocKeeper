@@ -69,13 +69,6 @@ class UsersController {
 
     return response.json();
   }
-
-  async index(request, response) {
-    const users = await knex("users")
-      .select('id', 'name', 'email', 'admin');
-
-    return response.json(users);
-  }
 }
 
 module.exports = UsersController;

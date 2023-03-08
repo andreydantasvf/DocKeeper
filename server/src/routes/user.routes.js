@@ -6,7 +6,6 @@ const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 const userRoutes = Router();
 const usersController = new UsersController();
 
-userRoutes.get("/", ensureAuthenticated, usersController.index);
 userRoutes.post("/", usersController.create);
 userRoutes.put("/:id", ensureAuthenticated, usersController.update);
 
