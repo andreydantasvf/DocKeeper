@@ -7,6 +7,7 @@ import { TitlePage } from "../../components/TitlePage";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Button } from "../../components/Button";
+import { BackButton } from "../../components/BackButton";
 
 import { api } from "../../services/api";
 
@@ -61,6 +62,8 @@ export function ShowArticle() {
             subTitle={article.description}
             icon={AiFillFile}
           />
+
+          <BackButton />
 
           <Content>
             {article.content}
