@@ -9,11 +9,22 @@ export const Container = styled.div`
 
   cursor: pointer;
 
-  > h3 {
-    font-size: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+
+  img {
+    width: 10rem;
+    height: 10rem;
   }
 
-  > span {
-    font-size: 1.4rem;
+  > .text-content {
+    > h3 {
+      font-size: 3rem;
+    }
+
+    > span {
+      font-size: 1.4rem;
+    }
   }
 `;

@@ -59,6 +59,7 @@ export function Home() {
               {articles.map(article => (
                 <ArticleCard
                   key={String(article.id)}
+                  img={article.imageUrl}
                   name={article.name}
                   description={article.description}
                   id={article.id}

@@ -10,8 +10,11 @@ export function ArticleCard({ name, img, id, description }) {
 
   return (
     <Container onClick={() => handleShowArticle(id)}>
-      <h3>{name}</h3>
-      <span>{description}</span>
+      <img src={img} alt="Imagem do Artigo" />
+      <div className="text-content">
+        <h3>{name}</h3>
+        <span>{description}</span>
+      </div>
     </Container>
   )
 }
