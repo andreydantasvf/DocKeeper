@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import TreeMenu from 'react-simple-tree-menu'
-import { handleCategory, handleName } from "../../redux/categorySlice";
 
 import { api } from "../../services/api";
+import { handleCategory, handleName } from "../../redux/categorySlice";
 
 import { Container } from "./styles";
 
@@ -27,8 +28,13 @@ export function Menu() {
   }, []);
 
   return (
-    isMenuVisible && <Container>
+    isMenuVisible &&
+    <Container>
       <TreeMenu data={data} onClickItem={({ id, name }) => handleCategoryMenu(id, name)} />
+
+      <Link to="/categories">
+      Gerenciar Categorias
+      </Link>
     </Container>
   )
 }

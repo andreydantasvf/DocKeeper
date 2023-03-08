@@ -9,6 +9,7 @@ export const Container = styled.aside`
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  gap: 10rem;
 
   > div {
     margin-top: 2rem;
@@ -40,5 +41,12 @@ export const Container = styled.aside`
         }
       }
     }
+  }
+
+  > a {
+    color: #FFF;
+    background: #7a9baf;
+    padding: 1rem;
+    border-radius: .8rem;
   }
 `;
