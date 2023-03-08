@@ -3,7 +3,6 @@ import { AiFillFolder } from "react-icons/ai";
 
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { Menu } from "../../components/Menu";
 import { TitlePage } from "../../components/TitlePage";
 import { Loading } from "../../components/Loading";
 import { Button } from "../../components/Button";
@@ -12,6 +11,7 @@ import { CategoryCard } from "../../components/CategoryCard";
 import { api } from "../../services/api";
 
 import { Container, CategoriesContent, MyCategories } from "./styles";
+import { BackButton } from "../../components/BackButton";
 
 export function Categories() {
   const [data, setData] = useState(null);
@@ -74,13 +74,14 @@ export function Categories() {
   return (
     <Container>
       <Header hideToggle={true} />
-      <Menu />
       <main>
         <TitlePage
           icon={AiFillFolder}
           title="Categorias"
-          subTitle="Crie ou edite as suas categorias"
+          subTitle="Crie ou remova as suas categorias"
         />
+
+        <BackButton />
 
         <CategoriesContent>
           <form>

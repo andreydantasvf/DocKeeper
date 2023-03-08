@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { AiFillFile } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { Menu } from "../../components/Menu";
 import { TitlePage } from "../../components/TitlePage";
+import { BackButton } from "../../components/BackButton";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
 
 import { Container, CategoriesContent } from "./styles";
-import { useNavigate } from "react-router-dom";
-import { BackButton } from "../../components/BackButton";
 
 export function Articles() {
   const [categories, setCategories] = useState(null);
@@ -66,7 +65,6 @@ export function Articles() {
   return (
     <Container>
       <Header hideToggle={true} />
-      <Menu />
       <main>
         <TitlePage
           icon={AiFillFile}
