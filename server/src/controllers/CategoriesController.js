@@ -13,23 +13,6 @@ class CategoriesController {
     return response.status(201).json();
   }
 
-  async update(request, response) {
-    const { id } = request.params;
-    const categoryUpdate = { ...request.body };
-
-    const category = await knex("categories").where({ id }).first();
-
-    if (!category) {
-      throw new AppError("Categoria não encontrada.");
-    }
-
-    await knex("categories")
-      .where({ id })
-      .update(categoryUpdate);
-
-    return response.status(204).json();
-  }
-
   async delete(request, response) {
     const { id } = request.params;
 
@@ -86,18 +69,6 @@ class CategoriesController {
     const categories = await knex("categories");
 
     return response.json(withPath(categories));
-  }
-
-  async show(request, response) {
-    const { id } = request.params;
-
-    const category = await knex("categories").where({ id }).first();
-
-    if (!category) {
-      throw new AppError("Categoria não encontrada.");
-    }
-
-    return response.json(category);
   }
 
   async showTree(request, response) {
