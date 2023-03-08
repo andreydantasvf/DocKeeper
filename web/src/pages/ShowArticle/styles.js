@@ -34,4 +34,5 @@ export const Content = styled.div`
   margin-top: 2rem;
   padding: 2rem;
   border-radius: 0.8rem;
+  word-break: break-all;
 `;
