@@ -33,6 +33,24 @@ function AuthProvider({ children }) {
     setData({});
   }
 
+  async function updateUser({ user }) {
+    try {
+      await api.put("/users", user);
+
+      localStorage.setItem("@dockeeper:user", JSON.stringify(user));
+
+      setData({ user, token: data.token });
+
+      alert("Usuário alterado com sucesso!");
+    } catch(error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível atualizar o perfil.")
+      }
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@dockeeper:token");
     const user = localStorage.getItem("@dockeeper:user");
@@ -51,6 +69,7 @@ function AuthProvider({ children }) {
     <AuthContext.Provider value={{
       signIn,
       signOut,
+      updateUser,
       user: data.user
     }}>
       {children}

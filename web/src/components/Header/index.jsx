@@ -39,7 +39,7 @@ export function Header({ hideToggle = false }) {
         <FaUserCircle />
 
         <DropDown>
-          <a href="#">Configurações</a>
+          <Link to="/config">Configurações</Link>
           <a onClick={handleSignOut}>Sair</a>
         </DropDown>
       </UserMenu>
