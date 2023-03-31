@@ -3,11 +3,7 @@ const path = require("path");
 
 module.exports = {
   client: 'postgresql',
-  connection: {
-    database: 'dockeeper',
-    user: process.env.USER_POSTGRES,
-    password: process.env.PASSWORD_POSTGRES
-  },
+  connection: process.env.POSTGRES_URL,
   pool: {
     min: 2,
     max: 10
