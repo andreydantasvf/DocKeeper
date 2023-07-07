@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TreeMenu from 'react-simple-tree-menu'
 
-import { api } from "../../services/api";
+import { categoriesTree } from "../../mocks/mockCategoriesTree";
 import { handleCategory, handleName } from "../../redux/categorySlice";
 
 import { Container } from "./styles";
@@ -20,8 +20,7 @@ export function Menu() {
 
   useEffect(() => {
     async function fetchTree() {
-      const response = await api.get("/categories/tree");
-      setData(response.data)
+      setData(categoriesTree)
     }
 
     fetchTree();
@@ -33,7 +32,7 @@ export function Menu() {
       <TreeMenu data={data} onClickItem={({ id, name }) => handleCategoryMenu(id, name)} />
 
       <Link to="/categories">
-      Gerenciar Categorias
+        Gerenciar Categorias
       </Link>
     </Container>
   )

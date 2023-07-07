@@ -8,15 +8,11 @@ import { Header } from "../../components/Header";
 import { TitlePage } from "../../components/TitlePage";
 import { BackButton } from "../../components/BackButton";
 
-import { api } from "../../services/api";
-import { useAuth } from "../../hooks/auth";
+import { categories } from "../../mocks/mockCategories";
 
 import { Container, CategoriesContent } from "./styles";
 
 export function Articles() {
-  const [categories, setCategories] = useState(null);
-
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -25,12 +21,11 @@ export function Articles() {
   const [category, setCategory] = useState(null);
   const [content, setContent] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   async function fetchCategories() {
-    const response = await api.get("/categories");
-    setCategories(response.data);
-    setCategory(response.data[0].id);
+    setCategories(categories);
+    setCategory(categories[0].id);
   }
 
   function handleCreateArticles(event) {
@@ -39,23 +34,8 @@ export function Articles() {
     if (!name.trim() || !description.trim() || !imageUrl.trim() || !category || !content.trim()) {
       return alert("Preencha todos os campos.")
     }
-
-    setIsLoading(true);
-
-    api.post("articles", { name, description, imageUrl, categoryId: category, content, userId: user.id })
-      .then(() => {
-        alert("Artigo cadastrado com sucesso!");
-        navigate("/");
-      })
-      .catch(error => {
-        if (error.response) {
-          alert(error.response.data.message);
-        } else {
-          alert("Não foi possível criar o artigo!")
-        }
-      }).finally(() => {
-        setIsLoading(false);
-      });
+    alert("Artigo cadastrado com sucesso!");
+    navigate("/");
   }
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import { Footer } from "../../components/Footer";
 import { Button } from "../../components/Button";
 import { BackButton } from "../../components/BackButton";
 
-import { api } from "../../services/api";
+import { articlesShow } from "../../mocks/mockArticlesShow";
 
 import { Container, Content } from "./styles";
 
@@ -18,34 +18,12 @@ export function ShowArticle() {
   const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
-  const navigate = useNavigate();
-
-  function handleDeleteArticle() {
-    const confirm = window.confirm("Deseja mesmo deletar esse artigo?");
-
-    if (confirm) {
-      setIsLoading(true);
-      api.delete(`articles/${params.id}`)
-        .then(() => {
-          navigate(-1);
-        })
-        .catch(error => {
-          if (error.response) {
-            alert(error.response.data.message);
-          } else {
-            alert("Não foi possível deletar a categoria!");
-          }
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
-  }
 
   useEffect(() => {
     async function fetchArticle() {
-      const response = await api.get(`/articles/${params.id}`);
-      setArticle(response.data);
+      const articleFiltered = articlesShow.find(article => article.id == params.id)
+      console.log(params.id)
+      setArticle(articleFiltered);
     }
 
     fetchArticle();
@@ -72,7 +50,6 @@ export function ShowArticle() {
           <Button
             title="Deletar"
             loading={isLoading}
-            onClick={handleDeleteArticle}
           />
         </main>
         <Footer />

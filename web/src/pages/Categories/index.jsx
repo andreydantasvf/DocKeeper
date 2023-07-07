@@ -8,7 +8,7 @@ import { Loading } from "../../components/Loading";
 import { Button } from "../../components/Button";
 import { CategoryCard } from "../../components/CategoryCard";
 
-import { api } from "../../services/api";
+import { categories } from "../../mocks/mockCategories";
 
 import { Container, CategoriesContent, MyCategories } from "./styles";
 import { BackButton } from "../../components/BackButton";
@@ -19,9 +19,8 @@ export function Categories() {
   const [isLoading, setIsLoading] = useState(false)
   const [parentId, setParentId] = useState(null);
 
-  async function fetchCategories() {
-    const response = await api.get("/categories");
-    setData(response.data);
+  function fetchCategories() {
+    setData(categories);
   }
 
   function handleCreateCategory(event) {
@@ -30,40 +29,15 @@ export function Categories() {
     if (!name.trim()) {
       return alert("Preencha todos os campos.")
     }
-
-    setIsLoading(true);
-
-    api.post("categories", { name, parentId })
-      .then(() => {
-        alert("Categoria cadastrada com sucesso!");
-      })
-      .catch(error => {
-        if (error.response) {
-          alert(error.response.data.message);
-        } else {
-          alert("Não foi possível criar a categoria!")
-        }
-      }).finally(() => {
-        setIsLoading(false);
-        fetchCategories();
-      });
+    alert("Categoria cadastrada com sucesso!");
+    fetchCategories();
   }
 
   function handleDeleteCategory(id) {
     const confirm = window.confirm("Deseja realmente deletar essa categoria?");
 
     if (confirm) {
-      api.delete(`categories/${id}`)
-        .then(() => {
-          fetchCategories();
-        })
-        .catch(error => {
-          if (error.response) {
-            alert(error.response.data.message);
-          } else {
-            alert("Não foi possível deletar a categoria!")
-          }
-        });
+      fetchCategories();
     }
   }
 

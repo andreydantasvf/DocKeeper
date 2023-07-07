@@ -9,14 +9,12 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
 import { useAuth } from "../../hooks/auth";
+import { user } from "../../mocks/mockUser";
 
 import { Container, Form } from "./styles";
-import { api } from "../../services/api";
-import { useNavigate } from "react-router-dom";
 
 export function ConfigUser() {
-  const { user, updateUser } = useAuth();
-  const navigate = useNavigate();
+  const { updateUser } = useAuth();
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);

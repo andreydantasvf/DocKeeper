@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillFile } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -10,36 +10,24 @@ import { TitlePage } from "../../components/TitlePage";
 import { Loading } from "../../components/Loading";
 import { ArticleCard } from "../../components/ArticleCard";
 
-import { api } from "../../services/api";
+import { articles } from "../../mocks/mockArticles";
+import { categoriesTree } from "../../mocks/mockCategoriesTree";
 import { handleCategory, handleName } from "../../redux/categorySlice";
 
 import { Container, MyArticles } from "./styles";
 
 export function Home() {
-  const [articles, setArticles] = useState(null);
-  const { id } = useSelector(state => state.category);
-  const { name } = useSelector(state => state.category);
   const { isMenuVisible } = useSelector(state => state.menu);
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function setInitialIdCategory() {
-      const response = await api.get("/categories/tree");
-      dispatch(handleCategory(response.data[0].id));
-      dispatch(handleName(response.data[0].name));
+      dispatch(handleCategory(categoriesTree[0].id));
+      dispatch(handleName(categoriesTree[0].name));
     }
 
     setInitialIdCategory();
   }, []);
-
-  useEffect(() => {
-    async function fetchArticles() {
-      const response = await api.get(`articles/category/${id}`);
-      setArticles(response.data);
-    }
-
-    fetchArticles();
-  }, [id]);
 
   return (
     <Container className={!isMenuVisible && "hide-menu"}>
@@ -48,7 +36,7 @@ export function Home() {
       <main>
         <TitlePage
           title="Meus Artigos"
-          subTitle={`Todos os seus artigos sobre: ${name}`}
+          subTitle={`Todos os seus artigos sobre:`}
           icon={AiFillFile}
         />
 

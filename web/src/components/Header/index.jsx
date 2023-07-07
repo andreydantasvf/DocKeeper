@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../../redux/menuSlice";
 
 import { useAuth } from "../../hooks/auth";
+import { user } from "../../mocks/mockUser";
 
 import { Container, UserMenu, DropDown } from "./styles";
 
 export function Header({ hideToggle = false }) {
-  const { user, signOut } = useAuth();
   const dispatch = useDispatch();
   const { isMenuVisible } = useSelector(state => state.menu)
 
@@ -17,11 +17,6 @@ export function Header({ hideToggle = false }) {
 
   function handleToggleMenu() {
     dispatch(toggleMenu());
-  }
-
-  function handleSignOut() {
-    navigation("/");
-    signOut();
   }
 
   return (
@@ -40,7 +35,7 @@ export function Header({ hideToggle = false }) {
 
         <DropDown>
           <Link to="/config">Configurações</Link>
-          <a onClick={handleSignOut}>Sair</a>
+          <a>Sair</a>
         </DropDown>
       </UserMenu>
     </Container>
